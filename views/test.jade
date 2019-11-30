@@ -1,0 +1,51 @@
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        |   
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        |   
+        title jQuery UI Spinner - Default functionality
+        |   
+        link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+        
+        script(src='https://code.jquery.com/jquery-1.12.4.js')
+        |   
+        script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+           
+        
+        script.
+            $( function() {
+            var spinner = $( "#spinner" ).spinner();
+            $( "#disable" ).on( "click", function() {
+            if ( spinner.spinner( "option", "disabled" ) ) {
+            spinner.spinner( "enable" );
+            } else {
+            spinner.spinner( "disable" );
+            }
+            });
+            $( "#destroy" ).on( "click", function() {
+            if ( spinner.spinner( "instance" ) ) {
+            spinner.spinner( "destroy" );
+            } else {
+            spinner.spinner();
+            }
+            });
+            $( "#getvalue" ).on( "click", function() {
+            alert( spinner.spinner( "value" ) );
+            });
+            $( "#setvalue" ).on( "click", function() {
+            spinner.spinner( "value", 5 );
+            });
+            $( "button" ).button();
+            } );
+    body
+        p
+            label(for='spinner') Select a value:
+            |   
+            input#spinner(name='value' value="1")       
+     
+          
+        p
+            button#getvalue Get value
+            |   
+            button#setvalue Set value to 5

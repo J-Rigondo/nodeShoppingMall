@@ -1,0 +1,59 @@
+include header.jade
+html
+    head                      
+        link(rel='stylesheet',href='/css/main.css') 
+            
+    body
+        .slider
+            div
+                img(src='/img/mainroll/main1.jpg')
+            div
+                img(src='/img/mainroll/main2.jpg')
+            div
+                img(src='/img/mainroll/main3.jpg')
+
+            
+        script.
+            $(document).ready(function(){
+                $('.slider').slick({
+                    SlidesToShow:1,
+                    SlidesToScroll:1,
+                    autoplay:true,
+                    autoplaySpeed:1500,
+                    arrows:true,
+                    infinite:true                
+                });
+            });
+        section.home-brands
+            .brands-main
+                a(href="#")
+                    img(src='/img/maker/nike.png' alt='nike')
+                a(href="#")
+                    img(src='/img/maker/lonsdale.png' alt='lonsdale')
+                a(href="#")
+                    img(src='/img/maker/rival.png' alt='rival')
+                a(href="https://shop.adidas.co.kr/adiMain.action?NFN_ST=Y")
+                    img(src='/img/maker/adidas.png' alt='adidas')
+                a(href="#")
+                    img(src='/img/maker/pro-box.png' alt='pro-box')
+                a(href="#")
+                    img(src='/img/maker/ringside.png' alt='ringside')
+                a(href="#")
+                    img(src='/img/maker/kronk-logo.png' alt='kronk-logo')
+                a(href="#")
+                    img(src='/img/maker/exigo.png' alt='exigo')
+                a(href="https://www.cletoreyesboxing.com/")
+                    img(src='/img/maker/cleto-reyes.png' alt='cleto-reyes')
+                a(href="#")
+                    img(src='/img/maker/reebok.png' alt='reebok')
+                a(href="#")
+                    img(src='/img/maker/ergo.png' alt='ergo')
+                a(href="#")
+                    img(src='/img/maker/sting.png' alt='sting')
+                a(href="#")
+                    img(src='/img/maker/tuf-wear.png' alt='tuf-wear')
+                a(href="#")
+                    img(src='/img/maker/fly.png' alt='fly')                
+include footer.jade
+    
+    

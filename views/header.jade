@@ -1,0 +1,55 @@
+doctype html
+html
+    head
+        title header                
+        link(rel='stylesheet',href='/css/header.css')
+        script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+        link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
+        link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css")
+        script(type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")        
+    body            
+        header.container
+            div.area-link   
+                if session.user
+                    span #{session.user}님
+                    a(href="/login/logout") 
+                        span 로그아웃
+                else
+                    a(href="/login")
+                        span 로그인
+                a(href="/login")
+                    span 회원가입
+                a(href="")
+                    span 마이페이지
+                a(href="")
+                    span 고객센터            
+            
+            div.header-search
+                a(href="/")
+                    span#header-logo 네이버            
+                form(action='')       
+                    input(type='text' name='search')
+                    button(type='submit')
+                        span#search-image
+            
+        nav#nav-top
+            div.container
+                ul
+                    li
+                        a(href='/glove' id='glove') 글러브
+                    li
+                        a(href='#' id='sandbag') 샌드백
+                    li
+                        a(href='#' id='headgear') 헤드기어
+                    li
+                        a(href='#' id='etc') 기타용품 
+        
+
+        
+        
+
+
+
+        
+
+                    

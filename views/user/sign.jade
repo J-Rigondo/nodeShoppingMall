@@ -1,0 +1,151 @@
+include ../header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/sign.css') 
+        script(type='text/javascript', src='/js/all.js') 
+    body
+        .cotn_principal
+            .cont_centrar
+                .cont_login
+                    .cont_info_log_sign_up
+                        .col_md_login
+                            .cont_ba_opcitiy
+                                h2 LOGIN                              
+                                   
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.                                 
+                                   
+                                button.btn_login(onclick='cambiar_login()') LOGIN
+                        .col_md_sign_up
+                            .cont_ba_opcitiy
+                                h2 SIGN UP                                   
+                                   
+                                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                   
+                                button.btn_sign_up(onclick='cambiar_sign_up()') SIGN UP
+                         
+                         
+                    .cont_back_info
+                        .cont_img_back_grey
+                            img(src='https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d', alt='')
+                    .cont_forms
+                        .cont_img_back_
+                            img(src='https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d', alt='')
+                          
+                        .cont_form_login
+                            a(href='#', onclick='ocultar_login_sign_up()')
+                                i.material-icons X
+                                
+                            h2 LOGIN
+                            form(action='/login', method='post' id='frmLogin')
+                               input(type='text', placeholder='ID' name='id' id='loginId' required)
+                               input(type='password', placeholder='Password' name='pw' id='loginPw' required)
+                               button.btn_login(type='button' id='btnLogin' onclick='cambiar_login()') LOGIN
+
+                            
+                        .cont_form_sign_up
+                            a(href='#', onclick='ocultar_login_sign_up()')
+                                i.material-icons X
+                                  
+                            h2 SIGN UP
+                            form(action='/login/register', method='post' id='frmRegister')
+                                input(type='text', placeholder='ID' id='regId' name='id' required)
+                                button.btn_check(type='button' id='idck' ) check
+                                input(type='password', placeholder='Password' id='regPw' name='pw' required)
+                                input(type='password', placeholder='Confirm Password' id='pwCheck' required)
+                                input(type='text', placeholder='name' id='regName' name='name' required)
+                                input(type='email', placeholder='Email' id='regEmail' name='email' required)
+                                input(type='tel', placeholder='tel' id='regTel' name='tel' required)
+                                button.btn_sign_up(id='btnRegister' onclick='cambiar_sign_up()') SIGN UP
+
+        script.
+            //로그인 제출
+            $('#btnLogin').click(function(){
+                var id=$('#loginId').val();
+                var pw=$('#loginPw').val();
+
+                if(id=='')
+                    alert('아이디를 입력하세요');
+                else if(pw=='')
+                    alert('비밀번호를 입력하세요.');
+                else
+                    $('#frmLogin').submit();
+            })
+
+            var idsave=null; //아이디저장
+            var idcheck=false; //아이디체크
+            var pwcheck=false; //비밀번호체크
+            //공백제거
+            function trim(obj){ //공백제거
+                    var a = $(obj).val().replace(/ /gi, '');
+                    $(obj).val(a);
+                    return;
+            };
+            //아이디 중복 및 유효성 확인
+            $("#idck").click(function(){
+                    var text = $("#regId").val();
+                    var regexp = /[0-9a-zA-Z;\-]/; // 숫자,영문,특수문자
+                    // var regexp = /[0-9]/; // 숫자만
+                    // var regexp = /[a-zA-Z]/; // 영문만
+                    if(text.length>10 || text.length<4){
+                            alert("아이디는 최소4자 최대10자까지 가능합니다.");                            
+                            return;
+                    }for( var i=0; i<text.length; i++){
+                            if(text.charAt(i) != " " && regexp.test(text.charAt(i)) == false ){
+                                    alert("특수문자는 입력할 수 없습니다.");                                    
+                                    return;
+                    }}
+                    var id=$("#regId").val();
+                    $.ajax({
+                            url:"/login/idcheck",
+                            dataType:'json',
+                            type:"post",
+                            data:{'id':id},
+                            success: function(result){
+                                    if(result.result){
+                                            alert("중복된 아이디입니다.");
+                                            
+                                    }else{
+                                            alert("사용가능한 아이디입니다");                           
+                                            idcheck=true;
+                                            idsave=$("#regId").val();
+                                    }
+                            }
+                    })
+            });
+            //회원가입 제출
+            $('#btnRegister').click(function(){
+                var id=$('#regId').val();
+                var email=$('#regEmail').val();
+                var pw=$('#regPw').val();
+                var pwCheck=$('#pwCheck').val();
+                var name=$("#regName").val();   
+                var tel=$("#regTel").val();                
+
+                if(id==''){
+                        alert("아이디를 입력하세요.");                        
+                }else if(pw==''){
+                        alert("비밀번호를 입력하세요.");
+                }else if(pwCheck==''){
+                        alert("비밀번호확인을 입력하세요.");
+                }else if(name==''){
+                        alert("이름을 입력하세요.");
+                }else if(email==''){
+                        alert("이메일을 입력하세요.");   
+                }else if(tel==""){
+                        alert("휴대폰번호를 입력하세요");
+                }else if(pw.length>20 || pw.length<4){
+                        alert("비밀번호는 최소4자 최대20자까지 가능합니다.");
+                        return false;
+                }else if(pw != pwCheck){
+                        alert("비밀번호를 다시확인해주세요.");
+                        return false;
+                }else if(idcheck==false || idsave!=id){
+                        alert("아이디중복을 다시 확인 해주세요.");
+                        idcheck=false;
+                        return false;                        
+                }else{
+                        $('#register').submit();
+                }
+            })
+
+            

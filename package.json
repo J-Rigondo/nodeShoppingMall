@@ -1,0 +1,18 @@
+{
+  "name": "boxingshopping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.0",
+    "jade": "^1.11.0",
+    "mysql": "^2.17.1",
+    "slick-carousel": "^1.8.1"
+  }
+}

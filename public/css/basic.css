@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: #fff;
+    color: black; }
+  
+body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0; }
+
+body, input, textarea, select, button, table {
+  font-size: 14px;
+  line-height: 1.25em;
+  font-family: '나눔고딕', NanumGothic, Helvetica, AppleGothic, Sans-serif, ngwoff, ngeot, '굴림', gulrem; }
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Hanna', sans-serif; }
+
+img, fieldset {
+  border: 0; }
+
+ul, ol {
+  list-style: none; }
+
+em, address {
+  font-style: normal; }
+
+a {
+  text-decoration: none;
+ }
+
+a:hover, a:active, a:focus {
+  text-decoration: none;
+ }
+
+ .container{
+    position: relative;
+    margin: 0 auto;
+    width: 1080px;    
+}
+
+.pagingdiv{
+  margin: 0px auto;
+  width: 1200px;
+  position: relative;
+}
+.paging{
+  height:61px;
+}
+.paging span{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+}
+.paging ul {  
+  list-style:none;  
+  float:left;  
+  display:inline;  
+}  
+.paging ul li {  
+  float:left;  
+}  
+.paging ul li a {  
+  float:left;  
+  padding:4px;  
+  margin-right:3px;  
+  width:26px;  
+  color:#000;  
+  font:bold 12px tahoma;  
+  border:1px solid #eee;  
+  text-align:center;  
+  text-decoration:none;  
+}  
+.paging ul li a:hover, .paging ul li a:focus {  
+  color:#fff;  
+  border:1px solid #17a2b8;  
+  background-color:#17a2b8;  
+}

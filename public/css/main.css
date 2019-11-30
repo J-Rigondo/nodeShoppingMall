@@ -1,0 +1,30 @@
+.home-brands{
+    background:#212121;
+    text-align:center;
+    border-bottom:6px solid #17a2b8;
+    max-width:100%;
+}
+
+.brands-main{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:.7;
+}
+
+.brands-main a{
+    display:inline-block;
+    padding:10px 5px;
+    width:7.1%;
+    margin:0;
+}
+
+.brands-main img{
+    border:none;
+    max-width:100%;
+    height:auto;
+    display:inline-block;
+}
+
+
+
