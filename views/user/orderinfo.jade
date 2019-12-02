@@ -1,0 +1,41 @@
+include ../header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/orderForm.css')
+    body
+        .container
+            .pay-header
+                img(src="/img/util/check.png", alt="")
+                span 주문정보 확인
+            table.table-box
+                thead
+                    tr
+                        th
+                            strong 상품정보
+                        th 수량
+                        th 상품금액
+                        th 판매자
+                        th 주문상태
+                        th 주문일
+                tbody
+                    tr
+                        td.product-info
+                            span
+                                img(src="/img/dbimg/tadiwg.jpg", alt="")
+                            div
+                                p 복싱 권투 글러브
+                                dl
+                                    dt size :
+                                    dd 10oz
+                        td
+                            span 1
+                        td
+                            span 200,000원
+                        td
+                            span 아디다스
+                        td
+                            span 출고준비
+                        td
+                            span 2019-11-11
+            

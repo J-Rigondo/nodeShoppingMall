@@ -1,0 +1,15 @@
+include ../header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/orderForm.css')
+    body
+        .container
+            div.finish-header
+                img(src="/img/util/check.png", alt="")
+                h3 결제가 완료되었습니다
+                p 구매하신 상품은 마이페이지 > 주문내역에서 확인하실 수 있습니다.
+            hr.finish-line
+            .my-btn
+                button(type="button" onclick="location.href='/mypage'") 마이페이지로
+include ../footer.jade

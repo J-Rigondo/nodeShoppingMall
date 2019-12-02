@@ -1,0 +1,303 @@
+table{
+  margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    border: 0;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.pay-header{
+  margin:10px 0 10px 0;
+}
+
+.pay-header img{
+  vertical-align: middle;
+}
+.pay-header .basket{
+  display: inline-block;
+  width: 60px;
+  height: 60px; 
+}
+
+.pay-header span{
+  font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+    padding:12px;
+}
+
+.table-box{
+  width:100%;  
+  border-top:1px solid #717171;
+  border-bottom:1px solid #dbddbd; 
+}
+
+.product-info{
+  padding-left:15px;
+  padding-right:0;
+  white-space:normal;
+}
+
+.product-info span{
+  display: table-cell;
+}
+
+.product-info img{
+  width:40px;
+  height:40px;
+}
+.product-info div{
+  display:table-cell;
+  padding:0 0 0 12px;
+  vertical-align: middle;
+}
+.product-info dl{
+  padding:2px 0 0;
+  color:#a9a9a9;
+  font-size: 11px;
+}
+.product-info dt{
+  display: inline;
+}
+.product-info dd{
+  display: inline;
+}
+
+.table-box th{
+  padding:10px 0;
+  border-bottom:1px solid #dbdbdb;
+}
+
+.table-box td{
+  height:auto;
+  padding:20px 15px;
+  text-align: center;
+  border-bottom:1px solid #dbdbdb;
+}
+
+.price-box{  
+  display: table;
+  width:100%;
+  margin:23px 0 0;
+  border: 2px solid #d6d6d6;
+}
+
+.price-box p{
+  padding: 0 0 5px;
+  font-size: 15px;
+}
+
+.price-box div{
+  display:table-cell;
+  padding:38px 40px 28px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.price-detail strong{
+  position: relative;
+  color:#000;
+  font-size: 18px;
+}
+
+.price-symbol{
+  margin: 0 10px;
+  vertical-align: -4px;
+}
+
+.price-box p .price-total{
+  color:#ff4c2e;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.price-total strong{
+  position:relative;
+  font-size: 24px;
+  top:1px;
+}
+.order-form h3{
+  padding:79px 0 18px 6px;
+  font-size:20px;  
+  font-weight: bold;
+}
+.order-table{
+  width:100%;
+  border-top:1px solid #717171;
+  border-bottom:1px solid #dbbddb;
+}
+.order-table th{
+  padding:15px 0 0 14px;
+  vertical-align: top;
+  border-right:1px dotted #e1e1e1;
+  border-bottom: 1px solid #dbdbdb;
+  color:#777;
+  text-align: left;
+  width: 18%;
+}
+.order-table td{
+  height:28px;
+  padding:10px 20px;
+  border-bottom: 1px solid #dbdbdb;
+}
+.order-table div{  
+  height:26px;
+  position:relative;
+  padding: 0 10px;
+}
+.order-table input{
+  width:100%;
+  height:30px;
+  padding:0;
+  color:#979797;
+  line-height: 24px;
+  outline:none;
+  border:none;
+  cursor: pointer;
+}
+.order-table input:focus{
+  background:#bac9cc;
+}
+.buy-btn{
+  padding:30px 0;
+  text-align:center;  
+}
+.buy-btn button{
+  width:300px;
+  height:61px;
+  line-height:59px;
+  font-size:20px;
+  background:#17a2b8;
+  border:1px solid #17a2b8;
+  color:#fff;
+  font-weight:bold;
+  border-radius: 3px;
+}
+.finish-header{
+  margin: 98px 0 48px 0px;
+    text-align: center;
+}
+.finish-header img{
+  vertical-align: middle;
+}
+.finish-header h3{
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 30px;
+}
+.finish-line{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+.my-btn{
+  padding:30px 0;
+  text-align:center;  
+}
+.my-btn button{
+  width:300px;
+  height:61px;
+  line-height:59px;
+  font-size:20px;
+  background:#17a2b8;
+  border:1px solid #17a2b8;
+  color:#fff;
+  font-weight:bold;
+  border-radius: 3px;
+}
+
+.num-change{
+  width: 30px;
+}
+
+.num-change input{
+  width: 32px;
+}
+
+.form-element{
+  width: 17px;
+  height: 16px;
+  min-height: auto;
+  margin: 0;
+  background: #F9F9F9;
+  display: inline-block;
+  position: relative;
+}
+
+.form-element input{
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  z-index: -1;
+  width: 13px;
+  height: 13px;
+  vertical-align: top;
+  outline: none;
+    font-family: Malgun Gothic,'맑은 고딕',Helvetica,AppleGothic,dotum,'돋움',sans-serif;
+    color: #717171;
+}
+
+.form-element label{
+  background-color: #F9F9F9;
+  position: relative;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.select-del{
+  text-align: left;
+  margin-top:20px;
+}
+
+.select-del button{
+  background: #fff;
+  width: 114px;
+  height: 30px;
+  line-height: 28px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: 1px solid #a3a3a3;
+  color: #666;
+  padding: 0 5px;
+  text-align: center;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.select-del button:hover{
+  border: 1px solid #000;
+  color: #000;
+}
+
+.orderBtn-area{
+  text-align: right;
+  margin-top: 20px;
+}
+
+.order-btn{
+  width: 203px;
+  height: 55px;
+  line-height: 53px;
+  font-weight: bold;
+  font-size: 14px;
+  background: #17a2b8;
+  border: 1px solid #17a2b8;
+  color: #fff;
+  font-family: Arial;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 0 5px;
+  text-align: center;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+

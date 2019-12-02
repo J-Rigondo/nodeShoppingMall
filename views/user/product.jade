@@ -1,0 +1,190 @@
+include ../header.jade
+html
+    head
+        meta(charset='utf8')
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/product.css')
+    body
+        .container            
+            .glove-desc
+                if search=='글러브'                
+                    h1.page-title Gloves
+                    p 
+                        |Get your hands on our range of quality gloves from big brands at Boxfit UK. Whether you’re a beginner, 
+                        |amateur or a pro, you’ll find the right pair of 
+                        span.text-red BOXING
+                        |, MMA, fitness, karate gloves to suit your level. We pride ourselves on having the best selection of gloves on 
+                        |the web from sports brands such as Lonsdale, Pro-Box, Everlast, Cleto Reyes, Adidas and Ringside.
+                        |We choose our brands based on their quality and respect in the boxing world.                    
+                    p
+                        |We’ll ensure you get top quality gloves at an affordable price. 
+                        |Make sure you have the winning edge and order your gloves online now or call to speak to us for advice.                
+                    p.text-red Shop boxing gloves.                
+                if search=='샌드백'
+                    h1.page-title Sandbag
+                    p 
+                        |Get your hands on our range of quality Sandbag from big brands at Boxfit UK. Whether you’re a beginner, 
+                        |amateur or a pro, you’ll find the right pair of 
+                        span.text-red BOXING
+                        |, MMA, fitness, karate gloves to suit your level. We pride ourselves on having the best selection of gloves on 
+                        |the web from sports brands such as Lonsdale, Pro-Box, Everlast, Cleto Reyes, Adidas and Ringside.
+                        |We choose our brands based on their quality and respect in the boxing world.                    
+                    p
+                        |We’ll ensure you get top quality gloves at an affordable price. 
+                        |Make sure you have the winning edge and order your gloves online now or call to speak to us for advice.                
+                    p.text-red Shop boxing sandbag.                
+                if search=='헤드기어'
+                    h1.page-title Headgear
+                    p 
+                        |Get your hands on our range of quality headgear from big brands at Boxfit UK. Whether you’re a beginner, 
+                        |amateur or a pro, you’ll find the right pair of 
+                        span.text-red BOXING
+                        |, MMA, fitness, karate gloves to suit your level. We pride ourselves on having the best selection of gloves on 
+                        |the web from sports brands such as Lonsdale, Pro-Box, Everlast, Cleto Reyes, Adidas and Ringside.
+                        |We choose our brands based on their quality and respect in the boxing world.                    
+                    p
+                        |We’ll ensure you get top quality gloves at an affordable price. 
+                        |Make sure you have the winning edge and order your gloves online now or call to speak to us for advice.                
+                    p.text-red Shop boxing headgear.                
+                if search=='기타'
+                    h1.page-title etc
+                    p 
+                        |Get your hands on our range of quality etc from big brands at Boxfit UK. Whether you’re a beginner, 
+                        |amateur or a pro, you’ll find the right pair of 
+                        span.text-red BOXING
+                        |, MMA, fitness, karate gloves to suit your level. We pride ourselves on having the best selection of gloves on 
+                        |the web from sports brands such as Lonsdale, Pro-Box, Everlast, Cleto Reyes, Adidas and Ringside.
+                        |We choose our brands based on their quality and respect in the boxing world.                    
+                    p
+                        |We’ll ensure you get top quality gloves at an affordable price. 
+                        |Make sure you have the winning edge and order your gloves online now or call to speak to us for advice.                
+                    p.text-red Shop boxing etc.                
+                
+            ul.goods_list
+                each pro,i in product
+                    li
+                        .img_area
+                            a.img(href='/proDetail?num='+pro.pro_no)
+                                img.product_img(src='/img/dbimg/'+pro.th_name)
+                        .info
+                            .tit
+                                a.link(href='/proDetail?num='+pro.pro_no)=pro.pro_name
+                            -var price=pro.pro_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            span.price #{price}원                                                       
+                            p &nbsp                                                    
+                            p 최상급 가죽 글러브
+                            p 배송비 무료 / 빠른 배송
+                            -var date=pro.pro_date.format("yyyy-MM-dd")
+                            p=date
+                        .info_mall
+                            p.mall_txt=pro.pro_com
+
+            .pagingdiv
+                        .paging
+                                -var pover=Math.trunc(pager.pagecnt/10)
+                                if(pover)
+                                        if(pno<11)
+                                                - var n = 1 //시작페이지
+                                                - var max=10 //끝페이지
+                                                - var next=11 //다음10페이지
+                                                - var check=1 //다음,마지막페이지 체크
+                                        else
+                                                - var n=pno%max ==0 ? (Math.trunc(pno/max)-1)*max+1 : Math.trunc(pno/max)*max+1 //시작페이지
+                                                - var ip=Math.trunc(n/max) //시작페이지앞자리
+                                                - var fp=Math.trunc(pager.pagecnt/max) //마지막페이지앞자리
+                                                -var pna=pager.pagecnt-n //잔여페이지수
+                                                -var next=(ip+1)*max+1 //다음10페이지
+                                                -var prev=ip*max //전10페이지
+                                                if(ip == fp)
+                                                        -var max=n+pna
+                                                else
+                                                        -var max=n+9
+                                else
+                                        - var n = 1
+                                        - var max=pager.pagecnt
+                                span
+                                        ul
+                                                if(search)
+                                                        if(pno>10)
+                                                                li
+                                                                        a#first(href="/search?page=1&search="+search style="height: 14px;")
+                                                                                img(src="./img/dbackb.png")
+                                                        if(prev)
+                                                                li
+                                                                        a#prev(href="/search?page="+prev+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                                                                img(src="./img/backb.png")
+                                                        while n <= max
+                                                                li
+                                                                        if(pno==n)
+                                                                                a(href="/search?page="+n+"&search="+search style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
+                                                                        else
+                                                                                a(href="/search?page="+n+"&search="+search)=n++
+
+                                                        if(ip != fp || check)
+                                                                li
+                                                                        a#next(href="/search?page="+next+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                                                                img(src="./img/forb.png")
+                                                                li
+                                                                        a#final(href="/search?page="+pager.pagecnt+"&search="+search style="height: 14px;")
+                                                                                img(src="./img/dforb.png")
+                                                else
+                                                        if(pno>10)
+                                                                li
+                                                                        a#first(href="/" style="height: 14px;")
+                                                                                img(src="./img/dbackb.png")
+                                                        if(prev)
+                                                                li
+                                                                        a#prev(href="/pagenum="+prev style="padding: 6px 4px 4px 4px;height: 12px;")
+                                                                                img(src="./img/backb.png")
+                                                        while n <= max
+                                                                li
+                                                                        if(pno==n)
+                                                                                a(href="/pagenum="+n style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
+                                                                        else
+                                                                                a(href="/pagenum="+n)=n++
+
+                                                        if(ip != fp || check)
+                                                                li
+                                                                        a#next(href="/pagenum="+next style="padding: 6px 4px 4px 4px;height: 12px;")
+                                                                                img(src="./img/forb.png")
+                                                                li
+                                                                        a#final(href="/pagenum="+pager.pagecnt style="height: 14px;")
+                                                                                img(src="./img/dforb.png")
+                                                                               
+        script.
+
+            if('#{search}'=='글러브'){                
+                $('.header-menu li a').removeClass('active') ;
+                $('#glove').addClass('active');
+            }else if('#{search}'=='샌드백'){
+                $('.header-menu li a').removeClass('active') ;
+                $('#sandbag').addClass('active');
+            }else if('#{search}'=='헤드기어'){
+                $('.header-menu li a').removeClass('active') ;
+                $('#headgear').addClass('active');
+            }else if('#{search}'=='기타'){
+                $('.header-menu li a').removeClass('active') ;
+                $('#etc').addClass('active');
+            }
+
+            //페이지처리
+            $("#first").hover(function(){
+                    $("#first").children().attr('src','/img/util/dbackw.png');
+            },function(){
+                    $("#first").children().attr('src','/img/util/dbackb.png');
+            })
+            $("#prev").hover(function(){
+                    $("#prev").children().attr('src','/img/util/backw.png');
+            },function(){
+                    $("#prev").children().attr('src','/img/util/backb.png');
+            })
+            $("#next").hover(function(){
+                    $("#next").children().attr('src','/img/util/forw.png');
+            },function(){
+                    $("#next").children().attr('src','/img/util/forb.png');
+            })
+            $("#final").hover(function(){
+                    $("#final").children().attr('src','/img/util/dforw.png');
+            },function(){
+                    $("#final").children().attr('src','/img/util/dforb.png');
+            })

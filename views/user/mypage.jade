@@ -1,0 +1,21 @@
+include ../header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/mypage.css')
+    body
+        .container
+            div.my-title
+                h3 마이페이지
+            hr.finish-line
+            div.mywrap
+                div.go-basket
+                    a(href="/basket")
+                        img(src="/img/util/basket1.png", alt="")
+                        p 장바구니
+                div.go-order
+                    a(href="/orderInfo")
+                        img(src="/img/util/my.png", alt="")
+                        p 주문내역
+
+include ../footer.jade

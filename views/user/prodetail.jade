@@ -6,20 +6,21 @@ html
     body
         .container
             .product-name
-                h2 트윈스 트라이벌 드래곤
+                h2=result[0].pro_name
                 div(style="margin-bottom:30px;")
                     hr
                 .pro-img
                     .thumb-nail
-                        img(src="/img/dbimg/adidashw1.jpg", alt="제품이미지")
+                        img(src="/img/dbimg/"+result[0].th_name, alt="제품이미지")
                 .info
                     .item
                         ul
                             li
                                 strong 판매가격
                                 div
-                                    strong 125,000
-                                    span 원
+                                    -var cost=result[0].pro_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    strong #{cost}원
+                                    
                             li
                                 strong 제품코드
                                 div
@@ -28,7 +29,7 @@ html
                             li
                                 strong 제조사
                                 div
-                                    strong 트윈스
+                                    strong=result[0].pro_com
                                     
                             li
                                 strong 배송비
@@ -39,11 +40,11 @@ html
                                 span                                    
                                     input#pro-cnt(type="number" min="1" max="999" value="1")
                                     |  개
-                                    
+                                    input#pro_no(type="hidden" value=result[0].pro_no)   
                     div.detail-btn
                         a(href="")
                             em 장바구니
-                        a(href="")
+                        a(href='javascript:imedi()')
                             em 바로 구매
             .pro-detail
                 div
@@ -51,9 +52,15 @@ html
                 div
                     img(src="/img/prodetail/itemmiddle.jpg", alt="")
                 div
-                    img(src="/img/dbimg/adidashw2.jpg", alt="")
+                    img(src="/img/dbimg/"+result[0].pro_content, alt="")
                 div.readme
                     img(src="/img/prodetail/readme.jpg", alt="")
+        script.
+            function imedi(){
+                var cnt = $('#pro-cnt').val();
+                var pro_no=$('#pro_no').val();
+                location.href='/imedi?cnt='+cnt+'&pro_no='+pro_no;
+            }
 include ../footer.jade
                     
                     

@@ -6,9 +6,9 @@
 .goods_list li{
     width: 940px;
     padding: 20px 0;
-    border-bottom: 1px solid #ececec;
+    border-bottom: 1px solid #b5b6b7;
     vertical-align: top;
-    background: #fffef8!important;
+    background: #ebf7f9!important;
     position: relative;
     overflow:auto;
 }
@@ -98,7 +98,7 @@
     bottom: 20px;
     width: 202px;
     padding-left: 20px;
-    border-left: 1px solid #ebecee;
+    border-left: 1px solid #b5b6b7;
 }
 
 .mall_txt{

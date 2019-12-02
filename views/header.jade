@@ -19,7 +19,7 @@ html
                         span 로그인
                 a(href="/login")
                     span 회원가입
-                a(href="")
+                a(href="/mypage")
                     span 마이페이지
                 a(href="")
                     span 고객센터            
@@ -34,15 +34,15 @@ html
             
         nav#nav-top
             div.container
-                ul
+                ul.header-menu
                     li
-                        a(href='/glove' id='glove') 글러브
+                        a(href='/search?search=글러브' id='glove') 글러브
                     li
-                        a(href='#' id='sandbag') 샌드백
+                        a(href='/search?search=샌드백' id='sandbag') 샌드백
                     li
-                        a(href='#' id='headgear') 헤드기어
+                        a(href='/search?search=헤드기어' id='headgear') 헤드기어
                     li
-                        a(href='#' id='etc') 기타용품 
+                        a(href='/search?search=기타' id='etc') 기타용품 
         
 
         

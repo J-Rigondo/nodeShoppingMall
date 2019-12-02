@@ -1,10 +1,12 @@
 const router=require('express').Router();
 const main=require('../model/main');
 router.get('/',main.main);
-router.get('/glove',main.glove);
-router.get('/sandbag',main.sandbag);
-router.get('/headgear',main.headgear);
-router.get('/etc',main.etc);
-router.get('/prodetail',main.proDetail);
+router.get('/search',main.search);
+router.get('/proDetail',main.proDetail);
 router.get('/test',main.test);
+router.get('/imedi',main.orderForm);
+router.get('/myPage',main.myPage);
+router.get('/orderInfo',main.orderInfo);
+router.get('/basket',main.basket);
+router.get('/orderFinish',main.orderFinish);
 module.exports=router;

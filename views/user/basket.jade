@@ -1,0 +1,67 @@
+include ../header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/orderForm.css')
+    body
+        .container
+            .pay-header
+                img.basket(src="/img/util/basket.png", alt="")
+                span 장바구니
+            table.table-box
+                thead
+                    tr
+                        th
+                            span.form-element
+                                input#allCheck(type="checkbox")
+                                label(for="allCheck")
+                        th
+                            strong 상품정보
+                        th 수량
+                        th 상품금액
+                        th 배송비
+                        th 판매자
+                        th 주문금액
+                tbody
+                    tr
+                        td
+                            span
+                                input(type="checkbox")
+                        td.product-info
+                            span
+                                img(src="/img/dbimg/tadiwg.jpg", alt="")
+                            div
+                                p 복싱 권투 글러브
+                                dl
+                                    dt size :
+                                    dd 10oz
+                        td
+                            span.num-change 
+                                input(type="number" min="1" value="1")
+                        td
+                            span 200,000원
+                        td
+                            span 무료
+                        td
+                            span 아디다스
+                        td
+                            span 200,000원
+            div.select-del
+                button 선택 상품 삭제
+            .price-box
+                div
+                    p
+                        span.price-detail 총 상품금액
+                            strong  250,000원
+                        span
+                            img.price-symbol(src="/img/util/sum.png", alt="")
+                            |  배송비 
+                            strong 0
+                            | 원
+                        span.price-total
+                            img.price-symbol(src="/img/util/equal.png", alt="")
+                            strong 300,000
+                            |원
+            div.orderBtn-area
+                button.order-btn 선택 상품 주문
+                button.order-btn 전체 상품 주문
