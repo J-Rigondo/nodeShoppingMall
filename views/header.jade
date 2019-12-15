@@ -17,11 +17,15 @@ html
                 else
                     a(href="/login")
                         span 로그인
-                a(href="/login")
-                    span 회원가입
+                if session.user
+                    a(href="/")
+                        span 회원가입
+                else
+                    a(href="/login")
+                        span 회원가입
                 a(href="/mypage")
                     span 마이페이지
-                a(href="")
+                a(href="/faq")
                     span 고객센터            
             
             div.header-search

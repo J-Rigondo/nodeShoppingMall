@@ -24,7 +24,7 @@ html
                             li
                                 strong 제품코드
                                 div
-                                    strong BX-0122
+                                    strong=result[0].pro_code
                                     
                             li
                                 strong 제조사
@@ -42,7 +42,7 @@ html
                                     |  개
                                     input#pro_no(type="hidden" value=result[0].pro_no)   
                     div.detail-btn
-                        a(href="")
+                        a(href="javascript:basket()")
                             em 장바구니
                         a(href='javascript:imedi()')
                             em 바로 구매
@@ -55,11 +55,33 @@ html
                     img(src="/img/dbimg/"+result[0].pro_content, alt="")
                 div.readme
                     img(src="/img/prodetail/readme.jpg", alt="")
+
+                    
         script.
             function imedi(){
                 var cnt = $('#pro-cnt').val();
                 var pro_no=$('#pro_no').val();
                 location.href='/imedi?cnt='+cnt+'&pro_no='+pro_no;
+            }
+
+            function basket(){
+                var cnt = $('#pro-cnt').val();
+                var pro_no=$('#pro_no').val();
+                $.ajax({
+                            url:"/basket/add",
+                            dataType:'json',
+                            type:"post",
+                            data:{'proCnt':cnt,'proNo':pro_no},
+                            success: function(result){                                    
+                                    if(result.result){
+                                            alert("장바구니에 추가되었습니다.");
+                                            
+                                    }else{
+                                            alert("이미 장바구니에 담긴 상품입니다.");                      
+                                            
+                                    }
+                            }
+                    });                
             }
 include ../footer.jade
                     

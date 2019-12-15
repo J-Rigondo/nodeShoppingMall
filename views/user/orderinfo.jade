@@ -19,23 +19,31 @@ html
                         th 주문상태
                         th 주문일
                 tbody
-                    tr
-                        td.product-info
-                            span
-                                img(src="/img/dbimg/tadiwg.jpg", alt="")
-                            div
-                                p 복싱 권투 글러브
-                                dl
-                                    dt size :
-                                    dd 10oz
-                        td
-                            span 1
-                        td
-                            span 200,000원
-                        td
-                            span 아디다스
-                        td
-                            span 출고준비
-                        td
-                            span 2019-11-11
+                    if orders.length
+                        each order in orders
+                            tr
+                                td.product-info
+                                    span
+                                        img(src="/img/dbimg/"+order.th_name, alt="")
+                                    div
+                                        p=order.pro_name
+                                        dl
+                                            dt size :
+                                            dd 10oz
+                                td
+                                    span=order.detail_cnt
+                                td
+                                    -var cost=(order.detail_price*order.detail_cnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+                                    span=cost
+                                td
+                                    span=order.pro_com
+                                td
+                                    span=order.order_status
+                                td
+                                    span=order.order_date.format("yyyy-MM-dd")
+                    else
+                        tr
+                            td(colspan="6")
+                                span 장바구니에 담긴 상품이 없습니다.
+include ../footer.jade
             

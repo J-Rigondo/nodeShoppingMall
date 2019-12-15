@@ -1,6 +1,7 @@
 include ../header.jade
 html
     head
+        script(src='https://code.jquery.com/jquery-2.2.4.min.js')
         link(rel='stylesheet',href='/css/basic.css')
         link(rel='stylesheet',href='/css/orderForm.css')
     body
@@ -8,13 +9,13 @@ html
             .pay-header
                 img.basket(src="/img/util/basket.png", alt="")
                 span 장바구니
-            table.table-box
+            table.table-box            
                 thead
                     tr
                         th
-                            span.form-element
-                                input#allCheck(type="checkbox")
-                                label(for="allCheck")
+                            
+                            input#allCheck(type="checkbox")
+                                
                         th
                             strong 상품정보
                         th 수량
@@ -23,36 +24,50 @@ html
                         th 판매자
                         th 주문금액
                 tbody
-                    tr
-                        td
-                            span
-                                input(type="checkbox")
-                        td.product-info
-                            span
-                                img(src="/img/dbimg/tadiwg.jpg", alt="")
-                            div
-                                p 복싱 권투 글러브
-                                dl
-                                    dt size :
-                                    dd 10oz
-                        td
-                            span.num-change 
-                                input(type="number" min="1" value="1")
-                        td
-                            span 200,000원
-                        td
-                            span 무료
-                        td
-                            span 아디다스
-                        td
-                            span 200,000원
+                -var totsum=0
+                    if product.length
+                        each pro in product
+                            tr
+                                td(name=(pro.pro_cost*pro.bs_cnt))
+                                    span(name=pro.bs_no)
+                                        input#check(type="checkbox" )
+                                td.product-info
+                                    span
+                                        img(src="/img/dbimg/"+pro.th_name, alt="")
+                                    div
+                                        p=pro.pro_name
+                                        dl
+                                            dt size :
+                                            dd 10oz
+                                td
+                                    -var pno=pro.pro_no
+                                    span.num-change 
+                                        input#num(type="number" min="1" name="#{pno}" value=pro.bs_cnt)                              
+                                    
+                                    button#numch(type="button" onclick="javascript:numch(#{pno})") 수정
+                                td
+                                    -var cost=(pro.pro_cost).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    span #{cost}원
+                                td
+                                    span 무료
+                                td
+                                    span=pro.pro_com
+                                td
+                                    -var totcost=(pro.pro_cost*pro.bs_cnt)
+                                    span=totcost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"
+                                -totsum+=totcost
+                    else
+                        tr
+                            td(colspan="7")
+                                span 장바구니에 담긴 상품이 없습니다.
             div.select-del
-                button 선택 상품 삭제
+                button#selectdel(type="button") 선택 상품 삭제
+                
             .price-box
-                div
+                #pbox
                     p
                         span.price-detail 총 상품금액
-                            strong  250,000원
+                            strong#ttprice=totsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"
                         span
                             img.price-symbol(src="/img/util/sum.png", alt="")
                             |  배송비 
@@ -60,8 +75,137 @@ html
                             | 원
                         span.price-total
                             img.price-symbol(src="/img/util/equal.png", alt="")
-                            strong 300,000
-                            |원
+                            strong#tprice=totsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"
+                            
             div.orderBtn-area
-                button.order-btn 선택 상품 주문
-                button.order-btn 전체 상품 주문
+                button#partbuy.order-btn(type="button") 선택 상품 주문
+                button#allbuy.order-btn(type="button") 전체 상품 주문
+            
+            form#btnorder(action="/basket/order" method="post")
+                input#orders(type="hidden" name="orders" value="")
+                input#totalcnt(type="hidden" name="total" value="")
+        
+        script.
+            //장바구니 클릭시 체크박스 전체선택
+            $(document).ready(function(){
+                var link=document.location.href;
+                if(link.match('basket')){
+                    $("input[type=checkbox]").each(function(){
+                        $(this).prop('checked',true);
+                    });
+                }
+            });
+
+            //전체상품 체크 및 해제
+            $("#allCheck").click(function(){
+                var chk=$(this).is(":checked");
+                if(chk)
+                    $("input[type=checkbox]").prop('checked',true);
+                else
+                    $("input[type=checkbox]").prop('checked',false);
+            });
+
+            //체크박스 금액계산
+            $("input[type=checkbox]").click(function(){
+                var total=0;
+                $("input[id=check]").each(function(){
+                    if($(this).is(":checked")){                        
+                        total += parseInt($(this.parentNode.parentNode.attributes[0].value).selector)                        
+                    }
+                });       
+                
+                
+                if(total==0){
+                    $('#tprice').text(0);
+                    $('#ttprice').text(0);
+                }
+                    
+                else{
+                    var temp=total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+                    $('#tprice').text(temp);
+                    $('#ttprice').text(temp);
+                }                
+                
+            });
+
+            //수량 수정
+            function numch(pno){
+                var num = $("input[name="+pno+"]").val();
+                console.log(num,pno);
+                $.ajax({
+                    url:"/basket/numch",
+                    dataType:'json',
+                    type:'post',
+                    data:{num:num,pno:pno},                    
+                    success:function(result){
+                        console.log(result);
+                        if(result.result==0)
+                            console.log('수량 에러');                        
+                    }
+                });
+                location.reload();
+            }
+            
+            //전체구매
+            $("#allbuy").click(function(){
+                var list=new Array();
+                $("input[id=check]").each(function(){                                            
+                    list.push(parseInt($(this.parentNode.attributes[0].value).selector));                    
+                });
+                if(list.length==0){
+                    alert("상품을 선택해주세요.");
+                    return;
+                }
+                $("#orders").val(JSON.stringify(list));
+                $("#totalcnt").val(#{totsum});
+                $("#btnorder").submit();                
+            });
+
+            //선택구매
+            $("#partbuy").click(function(){
+                var list=new Array();
+                $("input[id=check]").each(function(){
+                    if($(this).is(":checked")){                        
+                        list.push(parseInt($(this.parentNode.attributes[0].value).selector));
+                    }
+                });
+                if(list.length==0){
+                    alert("상품을 선택해주세요.");
+                    return;
+                }
+                $("#orders").val(JSON.stringify(list));
+                $("#totalcnt").val(#{totsum});
+                $("#btnorder").submit();    
+            });
+
+            //선택삭제
+            $("#selectdel").click(function(){
+                var list=new Array();
+                 $("input[id=check]").each(function(){
+                    if($(this).is(":checked")){                        
+                        list.push(parseInt($(this.parentNode.attributes[0].value).selector));
+                    }
+                });                
+                if(list.length==0){
+                    alert("상품을 선택해주세요.");
+                    return;
+                }
+                $.ajaxSettings.traditional = true //ajax에서 배열로 된 데이터를 보낼 때
+                $.ajax({
+                    url:"/basket/del",
+                    dataType:'json',
+                    type:'post',
+                    data:{list:list},
+                    success:function(result){
+                        if(result.result){
+                            alert('선택한 상품이 장바구니에서 삭제되었습니다.');
+                            location.reload();
+                        }else{
+                            alert('오류 발생');
+                        }
+                    }
+                })
+            });
+include ../footer.jade
+     
+

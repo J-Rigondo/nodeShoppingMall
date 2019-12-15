@@ -8,7 +8,7 @@ table{
 }
 
 .pay-header{
-  margin:10px 0 10px 0;
+  margin:28px 0 10px 0;
 }
 
 .pay-header img{
@@ -28,6 +28,7 @@ table{
 }
 
 .table-box{
+  margin-bottom:55px;
   width:100%;  
   border-top:1px solid #717171;
   border-bottom:1px solid #dbddbd; 
@@ -49,7 +50,7 @@ table{
 }
 .product-info div{
   display:table-cell;
-  padding:0 0 0 12px;
+  padding:0 0 0 30px;
   vertical-align: middle;
 }
 .product-info dl{
@@ -96,6 +97,7 @@ table{
 }
 
 .price-detail strong{
+  padding: 0 10px;
   position: relative;
   color:#000;
   font-size: 18px;
@@ -150,7 +152,7 @@ table{
   width:100%;
   height:30px;
   padding:0;
-  color:#979797;
+  color:#000;
   line-height: 24px;
   outline:none;
   border:none;
@@ -213,7 +215,7 @@ table{
 }
 
 .num-change input{
-  width: 32px;
+  width: 36px;
 }
 
 .form-element{
@@ -279,7 +281,7 @@ table{
 
 .orderBtn-area{
   text-align: right;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .order-btn{
@@ -299,5 +301,28 @@ table{
   vertical-align: top;
   box-sizing: border-box;
   cursor: pointer;
+}
+
+button#numch{
+  background: #fff;
+  width: 43px;
+  height: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: 1px solid #a3a3a3;
+  color: #666;
+  padding: 0 5px;
+  text-align: center;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+}
+
+button#numch:hover{
+  border: 1px solid #000;
+  color: #000;
 }
 

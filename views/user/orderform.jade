@@ -8,82 +8,133 @@ html
             .pay-header
                 img(src="/img/util/payment.png", alt="")
                 span 주문/결제
-            table.table-box
-                thead
-                    tr
-                        th
-                            strong 상품정보
-                        th 수량
-                        th 상품금액
-                        th 배송비
-                        th 판매자
-                        th 주문금액
-                tbody
-                    tr
-                        td.product-info
+            -var pcost
+            form.order-form(action="/orderFinish" method='post' id="frmOrder")
+                table.table-box
+                    thead
+                        tr
+                            th
+                                strong 상품정보
+                            th 수량
+                            th 상품금액
+                            th 배송비
+                            th 판매자
+                            th 주문금액
+                    tbody
+                    
+                        each pro in result
+                            tr
+                                td.product-info
+                                    span
+                                        img(src="/img/dbimg/"+pro.th_name, alt="")
+                                    div
+                                        p=pro.pro_name
+                                        dl
+                                            dt size :
+                                            dd 10oz
+                                td                                
+                                    if bs == 0
+                                        span=cnt
+                                    else
+                                        span=pro.bs_cnt
+                                td
+                                    -var cost=pro.pro_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    span #{cost}원
+                                td
+                                    span 무료
+                                td
+                                    span=pro.pro_com
+                                td
+                                    if bs == 1
+                                        -var tcost=(pro.pro_cost*pro.bs_cnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                        span #{tcost}원
+                                    else
+                                        -pcost=(pro.pro_cost*cnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                        span #{pcost}원
+
+                            input(type="hidden" name="proNo" value=pro.pro_no)
+                            input(type="hidden" name="bsNo" value=pro.bs_no)
+                            if result.length>1                            
+                                input(type="hidden" name="cnt" value=pro.bs_cnt)
+                            else                            
+                                input(type="hidden" name="cnt" value=cnt)
+
+                            input(type="hidden" name="price" value=pro.pro_cost)                            
+
+                .price-box
+                    div
+                        p
+                            span.price-detail 총 상품금액
+                                if bs == 1
+                                    -var tot=total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"
+                                    strong=tot
+                                else
+                                    
+                                    strong #{pcost}원
                             span
-                                img(src="/img/dbimg/tadiwg.jpg", alt="")
-                            div
-                                p 복싱 권투 글러브
-                                dl
-                                    dt size :
-                                    dd 10oz
-                        td
-                            span 1
-                        td
-                            span 200,000원
-                        td
-                            span 무료
-                        td
-                            span 아디다스
-                        td
-                            span 39,000원
-            .price-box
-                div
-                    p
-                        span.price-detail 총 상품금액
-                            strong  250,000원
-                        span
-                            img.price-symbol(src="/img/util/sum.png", alt="")
-                            |  배송비 
-                            strong 0
-                            | 원
-                        span.price-total
-                            img.price-symbol(src="/img/util/equal.png", alt="")
-                            strong 300,000
-                            |원
-            form.order-form(action="")
+                                img.price-symbol(src="/img/util/sum.png", alt="")
+                                |  배송비 
+                                strong 0
+                                | 원
+                            span.price-total
+                                img.price-symbol(src="/img/util/equal.png", alt="")
+                                if bs == 1
+                                    -var tot=total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"
+                                    strong=tot
+                                else
+                                    strong #{pcost}원
+
+                
                 h3 배송 정보 작성
                 table.order-table
                     tr
                         th 받으시는 분
                         td
                             div
-                                input(type="text" name="orderName" placeholder="받으시는 분을 작성하세요" autofocus)
+                                input#orderReceiveName(type="text" name="orderReceiveName" placeholder="받으시는 분을 작성하세요" autofocus)
                     tr
                         th 주소
                         td
                             div
-                                input(type="text" placeholder="주소를 작성하세요")
+                                input#orderAddress(type="text" name="orderAddress" placeholder="주소를 작성하세요")
                     tr
                         th 휴대전화
                         td
                             div
-                                input(type="text" placeholder="휴대전화를 작성하세요")
+                                input#orderPhone(type="text" name="orderPhone" placeholder="휴대전화를 작성하세요")
                     tr
                         th 주문자 정보
                         td
                             div
-                                input(type="text" placeholder="주문자 정보를 작성하세요")
+                                input#orderName(type="text" name="orderName" placeholder="주문자 정보를 작성하세요")
+                        input(type="hidden" name="userId" value="#{session.user}")
+                        if bs == 1                        
+                            input(type="hidden" name="total" value=total)
+                        else
+                            input(type="hidden" name="total" value=pcost)
+                        
+                        
                 div.buy-btn
-                    button#order-btn(type='button' onclick="location.href='/orderFinish'") 결제하기
+                    button#order-btn(type='button') 결제하기
 
                 
         script.
-            $('#order-btn').onclick(function(){
-                var orderName=$('orderName').val();
-                if(orderName==""){
-                    alert("받으시는 분을 입력하세요.");
+            $('#order-btn').click(function(){
+                var orderReceiveName=$('#orderReceiveName').val();
+                var orderAddress=$('#orderAddress').val();
+                var orderPhone=$('#orderPhone').val();
+                var orderName=$('#orderName').val();                           
+
+                if(orderReceiveName==''){
+                        alert("받으시는 분을 입력하세요.");                        
+                }else if(orderAddress==''){
+                        alert("주소를 입력하세요.");
+                }else if(orderPhone==''){
+                        alert("휴대전화를 작성하세요.");
+                }else if(orderName==''){
+                        alert("주문자 정보를 입력하세요.");                
+                }else{
+                        $('#frmOrder').submit();
                 }
             })
 include ../footer.jade
