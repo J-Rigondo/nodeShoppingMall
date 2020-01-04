@@ -39,11 +39,15 @@ app.use(function(req,res,next){
 
 app.use('/',require('./route/controller/mainctr'));
 app.use('/login',require('./route/controller/loginctr'));
+app.use('/manager',require('./route/controller/managerctr'));
 
 
 app.listen(3000,(req,res)=>{
     console.log('running at 3000 port');
 });
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";

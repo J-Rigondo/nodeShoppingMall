@@ -13,5 +13,5 @@ router.post('/basket/add',main.addbasket);
 router.post('/basket/numch',main.numch);
 router.post('/basket/del',main.basketdel);
 router.post('/basket/order',main.basketOrderForm);
-router.get('/faq',main.faq);
+router.get(['/help','/help=:pno'],main.help);
 module.exports=router;

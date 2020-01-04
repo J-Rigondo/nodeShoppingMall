@@ -1,0 +1,42 @@
+include man-header.jade
+html
+    head
+        link(rel='stylesheet',href='../css/management.css')
+        link(rel='stylesheet', href='../css/selectbox.min.css')
+        script(type='text/javascript', src='/js/selectbox.min.js')
+        script(type='text/javascript', src='/js/autosize.js')
+        script(type='text/javascript', src='/js/ckeditor/ckeditor.js')
+    body
+        .container
+            .prodmg(style="border:0px;margin:30px auto")
+                                    h2(style="margin-bottom:10px") FAQ등록
+                                    form#frm(action="/manager/faqupload" method="post")
+                                            .table
+                                                    table
+                                                            tbody
+                                                                    tr(style="border-top: 2px rgb(97, 96, 96) solid;")
+                                                                            th 제목
+                                                                            td: input#title(type='text' name="title")
+                                                                    tr
+                                                                            th 내용
+                                                                            td: textarea#explan(name="text" )
+                                    .uploadbtn
+                                            a.rainbtn#upload(alt="등록" style="margin: 10px 0px;")
+                                            a.rainbtn(href="/manager/faq" alt="취소" style="margin-left: 110px;margin-top: -40px;")
+        script.
+                
+                $("#upload").click(function(){
+                        if(!$("#title").val()){
+                                alert("제목을 입력하세요");
+                                return;
+                        }else if(!CKEDITOR.instances.explan.getData()){
+                                alert("내용을 입력하세요");
+                        }else{
+                                $("#frm").submit();
+                        }
+                })
+                CKEDITOR.replace( 'explan',{
+                        extraPlugins: 'autogrow',
+                });
+
+include ../footer.jade

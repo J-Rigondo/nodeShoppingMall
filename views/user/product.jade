@@ -80,76 +80,76 @@ html
                             p.mall_txt=pro.pro_com
 
             .pagingdiv
-                        .paging
-                                -var pover=Math.trunc(pager.pagecnt/10)
-                                if(pover)
-                                        if(pno<11)
-                                                - var n = 1 //시작페이지
-                                                - var max=10 //끝페이지
-                                                - var next=11 //다음10페이지
-                                                - var check=1 //다음,마지막페이지 체크
+                .paging
+                    -var pover=Math.trunc(pager.pagecnt/10)
+                    if(pover)
+                        if(pno<11)
+                            - var n = 1 //시작페이지
+                            - var max=10 //끝페이지
+                            - var next=11 //다음10페이지
+                            - var check=1 //다음,마지막페이지 체크
+                        else
+                            - var n=pno%max ==0 ? (Math.trunc(pno/max)-1)*max+1 : Math.trunc(pno/max)*max+1 //시작페이지
+                            - var ip=Math.trunc(n/max) //시작페이지앞자리
+                            - var fp=Math.trunc(pager.pagecnt/max) //마지막페이지앞자리
+                            -var pna=pager.pagecnt-n //잔여페이지수
+                            -var next=(ip+1)*max+1 //다음10페이지
+                            -var prev=ip*max //전10페이지
+                            if(ip == fp)
+                                -var max=n+pna
+                            else
+                                -var max=n+9
+                    else
+                        - var n = 1
+                        - var max=pager.pagecnt
+                    span
+                        ul
+                            if(search)
+                                if(pno>10)
+                                    li
+                                        a#first(href="/search?page=1&search="+search style="height: 14px;")
+                                            img(src="./img/dbackb.png")
+                                if(prev)
+                                    li
+                                        a#prev(href="/search?page="+prev+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/backb.png")
+                                while n <= max
+                                    li
+                                        if(pno==n)
+                                            a(href="/search?page="+n+"&search="+search style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
                                         else
-                                                - var n=pno%max ==0 ? (Math.trunc(pno/max)-1)*max+1 : Math.trunc(pno/max)*max+1 //시작페이지
-                                                - var ip=Math.trunc(n/max) //시작페이지앞자리
-                                                - var fp=Math.trunc(pager.pagecnt/max) //마지막페이지앞자리
-                                                -var pna=pager.pagecnt-n //잔여페이지수
-                                                -var next=(ip+1)*max+1 //다음10페이지
-                                                -var prev=ip*max //전10페이지
-                                                if(ip == fp)
-                                                        -var max=n+pna
-                                                else
-                                                        -var max=n+9
-                                else
-                                        - var n = 1
-                                        - var max=pager.pagecnt
-                                span
-                                        ul
-                                                if(search)
-                                                        if(pno>10)
-                                                                li
-                                                                        a#first(href="/search?page=1&search="+search style="height: 14px;")
-                                                                                img(src="./img/dbackb.png")
-                                                        if(prev)
-                                                                li
-                                                                        a#prev(href="/search?page="+prev+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
-                                                                                img(src="./img/backb.png")
-                                                        while n <= max
-                                                                li
-                                                                        if(pno==n)
-                                                                                a(href="/search?page="+n+"&search="+search style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
-                                                                        else
-                                                                                a(href="/search?page="+n+"&search="+search)=n++
+                                            a(href="/search?page="+n+"&search="+search)=n++
 
-                                                        if(ip != fp || check)
-                                                                li
-                                                                        a#next(href="/search?page="+next+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
-                                                                                img(src="./img/forb.png")
-                                                                li
-                                                                        a#final(href="/search?page="+pager.pagecnt+"&search="+search style="height: 14px;")
-                                                                                img(src="./img/dforb.png")
-                                                else
-                                                        if(pno>10)
-                                                                li
-                                                                        a#first(href="/" style="height: 14px;")
-                                                                                img(src="./img/dbackb.png")
-                                                        if(prev)
-                                                                li
-                                                                        a#prev(href="/pagenum="+prev style="padding: 6px 4px 4px 4px;height: 12px;")
-                                                                                img(src="./img/backb.png")
-                                                        while n <= max
-                                                                li
-                                                                        if(pno==n)
-                                                                                a(href="/pagenum="+n style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
-                                                                        else
-                                                                                a(href="/pagenum="+n)=n++
+                                if(ip != fp || check)
+                                    li
+                                        a#next(href="/search?page="+next+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/forb.png")
+                                    li
+                                        a#final(href="/search?page="+pager.pagecnt+"&search="+search style="height: 14px;")
+                                            img(src="./img/dforb.png")
+                            else
+                                if(pno>10)
+                                    li
+                                        a#first(href="/" style="height: 14px;")
+                                            img(src="./img/dbackb.png")
+                                if(prev)
+                                    li
+                                        a#prev(href="/pagenum="+prev style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/backb.png")
+                                while n <= max
+                                    li
+                                        if(pno==n)
+                                            a(href="/pagenum="+n style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
+                                        else
+                                            a(href="/pagenum="+n)=n++
 
-                                                        if(ip != fp || check)
-                                                                li
-                                                                        a#next(href="/pagenum="+next style="padding: 6px 4px 4px 4px;height: 12px;")
-                                                                                img(src="./img/forb.png")
-                                                                li
-                                                                        a#final(href="/pagenum="+pager.pagecnt style="height: 14px;")
-                                                                                img(src="./img/dforb.png")
+                                if(ip != fp || check)
+                                    li
+                                        a#next(href="/pagenum="+next style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/forb.png")
+                                    li
+                                        a#final(href="/pagenum="+pager.pagecnt style="height: 14px;")
+                                            img(src="./img/dforb.png")
                                                                                
         script.
 

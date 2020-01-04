@@ -1,0 +1,81 @@
+.faq{
+        position: relative;
+        left: 0;
+        top: 20px;
+        width: 1200px;
+        margin:0px auto;
+        font-family: "Roboto", sans-serif;
+        overflow: hidden;
+}
+.faqtitle{
+        display: inline-block;
+        top: 20px;
+        position: relative;
+        border-bottom: rgb(97, 96, 96) 3px solid;
+        width: 1180px;
+        margin: 10px 10px;
+}
+.faqtitle img{
+        margin-bottom:10px;
+        
+        width: 76px;
+        height: 50px;
+        float:left;
+}
+.faqtitle h2{
+        margin:10px;
+        display: inline-block;
+}
+.faqlist{
+        margin: 40px 10px;
+}
+.faqtable{
+        width:1180px;
+        border-collapse: collapse;
+        
+}
+.faqtable thead{
+        height: 40px;
+        background:#17a2b8;
+        color:#fff;
+}
+.faqtable th{
+        padding:15px;
+        font-size:16px;
+}
+.faqtable th:nth-child(1){
+        width:10%;
+}
+.faqtable th:nth-child(2){
+        width:70%;
+}
+.faqtable th:nth-child(3){        
+        width:20%;
+}
+.faqtable tr{
+        width:1180px;
+        border-top:1px solid #e6e6e6;
+        border-bottom:1px solid #e6e6e6;
+}
+.faqtable td{
+        padding:20px;
+        height: 30px;
+        font-size: 16px;
+}
+.faqtable td:nth-child(1){
+        text-align: center;
+}
+.faqtable td:nth-child(3){
+        text-align: center;
+}
+#faqtext{
+        text-align: left;
+        padding: 20px 70px;
+}
+#title{
+        cursor: pointer;
+        color:black;
+}
+#title:hover{
+        color:#17a2b8;
+}

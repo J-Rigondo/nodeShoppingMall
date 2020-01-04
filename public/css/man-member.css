@@ -1,0 +1,22 @@
+button#memdel{
+  background: #fff;
+  width: 114px;
+  height: 30px;
+  line-height: 28px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: 1px solid #a3a3a3;
+  color: #666;
+  padding: 0 5px;
+  text-align: center;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+}
+
+button#memdel:hover{
+  border: 1px solid #000;
+  color: #000;
+}

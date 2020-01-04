@@ -1,0 +1,45 @@
+html
+    head
+        title header                
+        link(rel='stylesheet',href='/css/man-header.css')
+        script(src='https://code.jquery.com/jquery-2.2.4.min.js')        
+    body            
+        header.container
+            div.area-link   
+                if session.user
+                    span #{session.user}님
+                    a(href="/login/logout") 
+                        span 로그아웃
+                else
+                    a(href="/login")
+                        span 로그인
+                if session.user
+                    a(href="/")
+                        span 회원가입
+                else
+                    a(href="/login")
+                        span 회원가입
+                a(href="/mypage")
+                    span 마이페이지
+                a(href="/help")
+                    span 고객센터            
+            
+            div.header-search
+                a(href="#")
+                    span#header-logo(style="transform: translateX(409px);margin: 15px;") 네이버            
+                   
+            
+           
+            
+        nav#nav-top(style="background-color: #2aaf56;")
+            div.container
+                ul.header-menu
+                    li
+                        a(href='/manager/member' id='member') 회원관리
+                    li
+                        a(href='/manager/product' id='product') 상품관리
+                    li
+                        a(href='/manager/order' id='order') 주문관리
+                    li
+                        a(href='/manager/faq' id='faq') FAQ관리
+        

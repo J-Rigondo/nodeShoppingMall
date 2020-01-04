@@ -1,0 +1,146 @@
+include man-header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/orderForm.css')
+        link(rel='stylesheet',href='/css/man-member.css')
+        style.
+            .paging ul li a:hover, .paging ul li a:focus {  
+            color:#fff;  
+            border:1px solid #2aaf56;  
+            background-color:#2aaf56;  
+            }
+    body
+        .container
+
+            table.table-box(style="margin:50px 0 0")
+                thead
+                    tr
+                        th
+                            strong ID
+                        th 이름
+                        th 휴대전화
+                        th Email
+                        th 상태
+                        th 삭제
+                    
+                tbody
+                
+                    each mem in members
+                        tr
+                            td
+                                span=mem.mem_id
+                            td                                
+                                span=mem.mem_name
+                            td
+                                span=mem.mem_phone
+                            td
+                                span=mem.mem_email
+                            td
+                                if mem.mem_valid == 1
+                                    span 회원
+                                else
+                                    span 탈퇴
+                            td(name=mem.mem_id)
+                                button#memdel(type="button" onclick="javascript:memdel('#{mem.mem_id}')") 삭제
+
+            .pagingdiv
+                .paging
+                    -var pover=Math.trunc(pager.pagecnt/10)
+                    if(pover)
+                        if(pno<11)
+                            - var n = 1 //시작페이지
+                            - var max=10 //끝페이지
+                            - var next=11 //다음10페이지
+                            - var check=1 //다음,마지막페이지 체크
+                        else
+                            - var n=pno%max ==0 ? (Math.trunc(pno/max)-1)*max+1 : Math.trunc(pno/max)*max+1 //시작페이지
+                            - var ip=Math.trunc(n/max) //시작페이지앞자리
+                            - var fp=Math.trunc(pager.pagecnt/max) //마지막페이지앞자리
+                            -var pna=pager.pagecnt-n //잔여페이지수
+                            -var next=(ip+1)*max+1 //다음10페이지
+                            -var prev=ip*max //전10페이지
+                            if(ip == fp)
+                                -var max=n+pna
+                            else
+                                -var max=n+9
+                    else
+                        - var n = 1
+                        - var max=pager.pagecnt
+                    span
+                        ul
+                            if(search)
+                                if(pno>10)
+                                    li
+                                        a#first(href="/manager/member?page=1&search="+search style="height: 14px;")
+                                            img(src="./img/dbackb.png")
+                                if(prev)
+                                    li
+                                        a#prev(href="/manager/member?page="+prev+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/backb.png")
+                                while n <= max
+                                    li
+                                        if(pno==n)
+                                            a(href="/manager/member?page="+n+"&search="+search style="color: #fff;border: 1px solid #2aaf56;background-color: #2aaf56;")=n++
+                                        else
+                                            a(href="/manager/member?page="+n+"&search="+search)=n++
+
+                                if(ip != fp || check)
+                                    li
+                                        a#next(href="/manager/member?page="+next+"&search="+search style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/forb.png")
+                                    li
+                                        a#final(href="/manager/member?page="+pager.pagecnt+"&search="+search style="height: 14px;")
+                                            img(src="./img/dforb.png")
+                            else
+                                if(pno>10)
+                                    li
+                                        a#first(href="/manager/member" style="height: 14px;")
+                                            img(src="./img/dbackb.png")
+                                if(prev)
+                                    li
+                                        a#prev(href="/manager/member?page="+prev style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/backb.png")
+                                while n <= max
+                                    li
+                                        if(pno==n)
+                                            a(href="/manager/member?page="+n style="color: #fff;border: 1px solid #2aaf56;background-color: #2aaf56;")=n++
+                                        else
+                                            a(href="/manager/member?page="+n)=n++
+
+                                if(ip != fp || check)
+                                    li
+                                        a#next(href="/manager/member?page="+next style="padding: 6px 4px 4px 4px;height: 12px;")
+                                            img(src="./img/forb.png")
+                                    li
+                                        a#final(href="/manager/member?page="+pager.pagecnt style="height: 14px;")
+                                            img(src="./img/dforb.png") 
+
+        
+        script.
+            $('.header-menu li a').removeClass('active') ;
+            $('#member').addClass('active');
+
+            function memdel(id){
+                $.ajax({
+                    url:"/manager/member/del",
+                    dataType:'json',
+                    type:'post',
+                    data:{id:id},                    
+                    success:function(result){                        
+                        if(result.result==1){
+                            alert('탈퇴처리 되었습니다.');
+                            location.reload();
+                        }
+                        else
+                            alert('실패');
+                                                    
+                    }
+                });     
+            }
+            
+                
+            
+                
+
+include ../footer.jade

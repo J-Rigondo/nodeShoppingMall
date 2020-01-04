@@ -1,0 +1,86 @@
+include man-header.jade
+html
+    head
+        link(rel='stylesheet',href='/css/management.css')
+        
+        script(type='text/javascript', src='/js/selectbox.min.js')
+        script(type='text/javascript', src='/js/autosize.js')
+        script(type='text/javascript', src='/js/ckeditor/ckeditor.js')
+    body
+        .prodmg                            
+            h2(style="margin-bottom:10px") 상품등록
+            form#sfrm(method="post" enctype="multipart/form-data" )
+                .table
+                    table
+                        tbody
+                            tr
+                                th 썸네일
+                                td
+                                    img#thumb(src="/img/util/thumbnail.png" style="border:1px solid;width:144px;height:144px")
+                                    input#simg(type='file' name="simg" accept=".jpg,.jpeg,.png,.gif,.bmp")
+                            input(name="no" style="display:none;")
+            form#frm(action="/manager/productupload" method="post" enctype="multipart/form-data")
+                .table
+                    table
+                        tbody                                    
+                            tr
+                                th 상품명
+                                td: input(type='text' style="width: 250px;" name="name")
+                            tr
+                                th 제조사
+                                td: input(type='text' style="width: 250px;" name="com")
+                            
+                            tr
+                                th 상품설명
+                                td: input(type="file" name="content")
+                                input#conno(name="no" style="display:none;")
+            .uploadbtn
+                a.rainbtn#upload(alt="등록" style="margin: 10px 0px;")
+                a.rainbtn(href="/manager/product" alt="취소" style="margin-left: 110px;margin-top: -40px;")
+        script.
+            $('.header-menu li a').removeClass('active') ;
+            $('#product').addClass('active'); 
+                $.ajax({
+                        url:"/manager/getnum",
+                        type:"post",
+                        success: function(result){
+                                var no=result.num;
+                                $("#sfrm")[0][0].value=no;
+                        }
+                })
+                var temp=$("#sfrm")[0][0].value;
+                $("#conno").val(temp);
+
+                $("#prod").css("border-bottom","5px solid white");
+                $("#prod").css("color","white");               
+                
+                
+
+                $("#simg").on("change",function(){
+                        var form=$('#sfrm')[0];
+                        var data = new FormData(form);
+                        $.ajax({
+                                url:"/manager/simgdb",
+                                type:"post",
+                                processData: false,
+                                contentType: false,
+                                data:data,
+                                success: function(result){
+                                        if(!result){
+                                                alert("사진 업로드가 실패했습니다.");
+                                        }else{
+                                                console.log(result.src);
+                                                $("#thumb").attr('src','/img/dbimg/'+result.src);
+                                        }
+                                }
+                        })
+                })
+
+                $("#upload").click(function(){
+                    $("#frm").submit();
+                })
+
+
+                
+                
+include ../footer.jade

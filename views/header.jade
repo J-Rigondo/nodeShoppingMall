@@ -25,13 +25,13 @@ html
                         span 회원가입
                 a(href="/mypage")
                     span 마이페이지
-                a(href="/faq")
+                a(href="/help")
                     span 고객센터            
             
             div.header-search
                 a(href="/")
                     span#header-logo 네이버            
-                form(action='')       
+                form(action='/search' method='get')       
                     input(type='text' name='search')
                     button(type='submit')
                         span#search-image

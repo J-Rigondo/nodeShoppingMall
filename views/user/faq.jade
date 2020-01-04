@@ -1,8 +1,89 @@
 include ../header.jade
 html
     head
-
+        link(rel='stylesheet',href='/css/basic.css')
+        link(rel='stylesheet',href='/css/faq.css')
     body
+        .faq
+            .faqtitle
+                img(src="/img/util/faq.png")
+                h2 고객센터 - FAQ
+            .faqlist
+                table.faqtable
+                    thead
+                        tr
+                            th 번호
+                            th 제목
+                            th 작성일
+                    tbody
+                        each fa,index in faq
+                            tr
+                                td=fa.faq_no
+                                td
+                                    #title(class=index)=fa.faq_title                            
+                                td=fa.faq_date.format('yyyy-MM-dd')
+                            tr(style="display:none" class=index)
+                                td#faqtext(colspan="3")=fa.faq_content                            
+                            
+        
+        .pagingdiv
+            .paging
+                -var pover=Math.trunc(pager.pagecnt/10)
+                if(pover)
+                    if(pno<11)
+                        - var n = 1 //시작페이지
+                        - var max=10 //끝페이지
+                        - var next=11 //다음10페이지
+                        - var check=1 //다음,마지막페이지 체크
+                    else
+                        - var n=pno%10 ==0 ? (Math.trunc(pno/10)-1)*10+1 : Math.trunc(pno/10)*10+1 //시작페이지
+                        - var ip=Math.trunc(n/10) //시작페이지앞자리
+                        - var fp=Math.trunc(pager.pagecnt/10) //마지막페이지앞자리
+                        -var pna=pager.pagecnt-n //잔여페이지수
+                        -var next=(ip+1)*10+1 //다음10페이지
+                        -var prev=ip*10 //전10페이지
+                        if(ip == fp)
+                            -var max=n+pna
+                        else
+                            -var max=n+9
+                else
+                    - var n = 1
+                    - var max=pager.pagecnt
+                span
+                    ul
+                        if(pno>10)
+                            li
+                                a#first(href="/help" style="height: 14px;")
+                                    img(src="./img/dbackb.png")
+                        if(prev)
+                            li
+                                a#prev(href="/help="+prev style="padding: 6px 4px 4px 4px;height: 12px;")
+                                    img(src="./img/backb.png")
+                        while n <= max
+                            li
+                                if(pno==n)
+                                    a(href="/help="+n style="color: #fff;border: 1px solid #17a2b8;background-color: #17a2b8;")=n++
+                                else
+                                    a(href="/help="+n)=n++
 
+                        if(ip != fp || check)
+                            li
+                                a#next(href="/help="+next style="padding: 6px 4px 4px 4px;height: 12px;")
+                                    img(src="./img/forb.png")
+                            li
+                                a#final(href="/help="+pager.pagecnt style="height: 14px;")
+                                    img(src="./img/dforb.png")
+
+                script.
+                    $("div[id=title]").click(function(){
+                            var num=$(this).attr("class");
+                            var status=$("tr[class="+num+"]").attr("style");
+                            if(status.match("none")){
+                                    $("tr[class="+num+"]").css("display","table-row")
+                            }else{
+                                    $("tr[class="+num+"]").css("display","none")
+                            }
+                    })
+        
 
 include ../footer.jade

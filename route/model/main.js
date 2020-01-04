@@ -37,7 +37,7 @@ exports.search=(req,res)=>{
     });          
 }
 exports.proDetail = (req,res)=>{
-    var num=req.query.num;
+    var num=req.query.num;    
     var sql='select * from product join thumbnail using(pro_no) where pro_valid=? and pro_no=?';
     db.query(sql,[1,num],(err,result)=>{
         res.render('prodetail',{result:result});
@@ -148,8 +148,7 @@ exports.basket=(req,res)=>{
         else{
             res.render('basket',{product:result});
         }
-    })
-    
+    });    
 }
 
 exports.addbasket=(req,res)=>{
@@ -209,10 +208,32 @@ exports.basketdel=(req,res)=>{
     }    
 }
 
-exports.faq=(req,res)=>{
-    res.send('faq');
-}
-
+exports.help=function(req,res){ //고객센터
+    var maxpost=10; //페이지당 상품수
+    var pno=req.params.pno; //페이지넘버
+    if(!pno)  var pno=1;
+    var start=maxpost*pno-maxpost;
+    var sql="select count(*) as postcnt from faq";
+    db.query(sql,function(err,result){
+            if(err) console.log(err);
+            else{
+                    var postcnt=result[0].postcnt;
+                    var sql="select * from faq  ORDER by faq_no DESC limit ?,?;";
+                    db.query(sql,[start,maxpost],function(err,result){
+                            if(err) console.log(err);
+                            else{
+                                    var pager={
+                                            pagecnt:postcnt%maxpost == 0 ? Math.trunc(postcnt/maxpost) : Math.trunc(postcnt/maxpost) +1, //총페이지수
+                                            startpost:maxpost*pno-maxpost, //시작상품넘버
+                                            endpost:maxpost*pno-1< postcnt ?  maxpost*pno-1 : postcnt-1  //마지막상품넘버
+                                    }                                   
+                                    res.render('faq',{faq:result,pager:pager,pno:pno});
+                                    
+                            }
+                    })
+            }
+    })
+};
 
 
 
